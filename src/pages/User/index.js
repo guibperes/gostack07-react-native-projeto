@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Text } from 'react-native'
 
 import { api } from '../../services/api'
 import {
