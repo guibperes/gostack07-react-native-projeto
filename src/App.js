@@ -1,10 +1,13 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { StatusBar } from 'react-native'
+
+import { Routes } from './routes'
 
 export function App () {
   return (
-    <View>
-      <Text>Hello React Native</Text>
-    </View>
+    <>
+      <StatusBar backgroundColor='#7159C1' />
+      <Routes />
+    </>
   )
 }
