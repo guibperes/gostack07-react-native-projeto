@@ -104,6 +104,6 @@ export function Main ({ navigation }) {
   )
 }
 
-Main.navigationOptions = {
+Main.navigationOptions = () => ({
   title: 'Main'
-}
+})
