@@ -19,7 +19,7 @@ import {
   ProfileButtonText
 } from './styles'
 
-export function Main () {
+export function Main ({ navigation }) {
   const [newUser, setNewUser] = useState('')
   const [users, setUsers] = useState([])
   const [loading, setloading] = useState(false)
@@ -41,6 +41,10 @@ export function Main () {
     }
     handleStorageSave()
   }, [users])
+
+  function handleNavigate (user) {
+    navigation.navigate('User', { user })
+  }
 
   async function handleSubmit () {
     setloading(true)
@@ -90,7 +94,7 @@ export function Main () {
             <Name>{item.name}</Name>
             <Bio>{item.bio}</Bio>
 
-            <ProfileButtton>
+            <ProfileButtton onPress={() => handleNavigate(item)}>
               <ProfileButtonText>Ver perfil</ProfileButtonText>
             </ProfileButtton>
           </User>

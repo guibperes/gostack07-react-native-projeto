@@ -3,10 +3,10 @@ import { Text } from 'react-native'
 
 import { Container } from './styles'
 
-export function User () {
+export function User ({ navigation }) {
   return (
     <Container>
-      <Text>User</Text>
+      <Text>{JSON.stringify(navigation.getParam('user'))}</Text>
     </Container>
   )
 }
