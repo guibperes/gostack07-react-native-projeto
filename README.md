@@ -8,7 +8,7 @@ Nesse desafio você adicionará novas funcionalidades na aplicação que desenvo
 
 Adicione um indicator de loading utilizando `<ActivityIndicator />` antes de carregar a lista de repositórios favoritados na tela de detalhes do Usuário.
 
-### [DOING] Scroll Infinito
+### [DONE] Scroll Infinito
 
 Adicione uma funcionalidade de scroll infinito na lista de repositórios favoritados. Assim que o usuário chegar nos 20% do final de lista, busque pelos items na próxima página e adicione na lista. Seu código ficará da seguinte forma:
 
@@ -27,7 +27,7 @@ Para requisitar uma nova página no Github utilize um parâmetro page no fim da 
 https://api.github.com/users/diego3g/starred?page=2
 ```
 
-### [TODO] Pull to Refresh
+### [DOING] Pull to Refresh
 
 Adicione uma funcionalidade para quando o usuário arrastar a listagem de repositórios favoritados pra baixo atualize a lista resetando o estado, ou seja, volte o estado da paginação para a página 1 exibindo apenas os 30 primeiros itens.
 

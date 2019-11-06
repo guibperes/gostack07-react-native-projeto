@@ -18,15 +18,21 @@ import {
 export function User ({ navigation }) {
   const user = navigation.getParam('user')
   const [stars, setStars] = useState([])
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     async function handleGetStars () {
-      const { data } = await api.get(`/users/${user.login}/starred`)
+      const { data } = await api.get(`/users/${user.login}/starred`, {
+        params: {
+          per_page: 10,
+          page
+        }
+      })
 
       setStars([...stars, ...data])
     }
     handleGetStars()
-  }, [])
+  }, [page])
 
   return (
     <Container>
@@ -39,6 +45,8 @@ export function User ({ navigation }) {
       <Stars
         data={stars}
         keyExtractor={star => String(star.id)}
+        onEndReached={() => setPage(page + 1)}
+        onEndReachedThreshold={0.2}
         renderItem={({ item }) => (
           <Starred>
             <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
