@@ -43,6 +43,10 @@ export function User ({ navigation }) {
     setPage(1)
   }
 
+  function handleRepoWebview (repo) {
+    navigation.navigate('Webview', { repo })
+  }
+
   return (
     <Container>
       <Header>
@@ -59,7 +63,7 @@ export function User ({ navigation }) {
         onRefresh={handleRefresh}
         refreshing={refreshing}
         renderItem={({ item }) => (
-          <Starred>
+          <Starred onTouchEnd={() => handleRepoWebview(item)}>
             <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
             <Info>
               <Title>{item.name}</Title>

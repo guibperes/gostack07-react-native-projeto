@@ -3,12 +3,14 @@ import { createStackNavigator } from 'react-navigation-stack'
 
 import { Main } from './pages/Main'
 import { User } from './pages/User'
+import { Webview } from './pages/Webview'
 
 export const Routes = createAppContainer(
   createStackNavigator(
     {
       Main,
-      User
+      User,
+      Webview
     },
     {
       headerLayoutPreset: 'center',
