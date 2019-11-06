@@ -4,11 +4,11 @@ Nesse desafio você adicionará novas funcionalidades na aplicação que desenvo
 
 ## Funcionalidades
 
-### [DOING] Loading de Repositórios
+### [DONE] Loading de Repositórios
 
 Adicione um indicator de loading utilizando `<ActivityIndicator />` antes de carregar a lista de repositórios favoritados na tela de detalhes do Usuário.
 
-### [TODO] Scroll Infinito
+### [DOING] Scroll Infinito
 
 Adicione uma funcionalidade de scroll infinito na lista de repositórios favoritados. Assim que o usuário chegar nos 20% do final de lista, busque pelos items na próxima página e adicione na lista. Seu código ficará da seguinte forma:
 

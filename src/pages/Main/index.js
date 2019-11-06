@@ -16,13 +16,15 @@ import {
   Name,
   Bio,
   ProfileButtton,
-  ProfileButtonText
+  ProfileButtonText,
+  PageLoadingContainer
 } from './styles'
 
 export function Main ({ navigation }) {
   const [newUser, setNewUser] = useState('')
   const [users, setUsers] = useState([])
   const [loading, setloading] = useState(false)
+  const [usersLoading, setUsersLoading] = useState(true)
   const [inputError, setInputError] = useState(false)
 
   useEffect(() => {
@@ -32,6 +34,8 @@ export function Main ({ navigation }) {
       if (users) {
         setUsers(JSON.parse(users))
       }
+
+      setUsersLoading(false)
     }
     handleStorageGet()
   }, [])
@@ -73,6 +77,17 @@ export function Main ({ navigation }) {
       setloading(false)
       setInputError(true)
     }
+  }
+
+  if (usersLoading) {
+    return (
+      <PageLoadingContainer>
+        <ActivityIndicator
+          color='#7159C1'
+          size={38}
+        />
+      </PageLoadingContainer>
+    )
   }
 
   return (

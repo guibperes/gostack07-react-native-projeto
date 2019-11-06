@@ -37,7 +37,7 @@ export const SubmitButton = styled(RectButton)`
   border-radius: 4px;
   margin-left: 10px;
   padding: 0 12px;
-  opacity: ${props => props.loading ? 0.7 : 1}
+  opacity: ${props => props.loading ? 0.7 : 1};
 `
 
 export const List = styled.FlatList.attrs({
@@ -88,4 +88,10 @@ export const ProfileButtonText = styled.Text`
   font-size: 14px;
   font-weight: bold;
   color: #FFF;
+`
+
+export const PageLoadingContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
 `
