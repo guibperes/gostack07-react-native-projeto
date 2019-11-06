@@ -23,6 +23,7 @@ export function Main ({ navigation }) {
   const [newUser, setNewUser] = useState('')
   const [users, setUsers] = useState([])
   const [loading, setloading] = useState(false)
+  const [inputError, setInputError] = useState(false)
 
   useEffect(() => {
     async function handleStorageGet () {
@@ -46,22 +47,32 @@ export function Main ({ navigation }) {
     navigation.navigate('User', { user })
   }
 
+  function handleTextChange (text) {
+    setNewUser(text)
+    setInputError(false)
+  }
+
   async function handleSubmit () {
     setloading(true)
 
-    const { data: apiData } = await api.get(`/users/${newUser}`)
+    try {
+      const { data: apiData } = await api.get(`/users/${newUser}`)
 
-    const data = {
-      name: apiData.name,
-      login: apiData.login,
-      bio: apiData.bio,
-      avatar: apiData.avatar_url
+      const data = {
+        name: apiData.name,
+        login: apiData.login,
+        bio: apiData.bio,
+        avatar: apiData.avatar_url
+      }
+
+      setUsers([...users, data])
+      setNewUser('')
+      setloading(false)
+      Keyboard.dismiss()
+    } catch (error) {
+      setloading(false)
+      setInputError(true)
     }
-
-    setUsers([...users, data])
-    setNewUser('')
-    setloading(false)
-    Keyboard.dismiss()
   }
 
   return (
@@ -72,9 +83,10 @@ export function Main ({ navigation }) {
           autoCapitalize='none'
           placeholder='Adicionar Usuário'
           value={newUser}
-          onChangeText={text => setNewUser(text)}
+          onChangeText={handleTextChange}
           returnKeyType='send'
           onSubmitEditing={handleSubmit}
+          error={inputError}
         />
         <SubmitButton loading={loading} onPress={handleSubmit}>
           {loading ? (
