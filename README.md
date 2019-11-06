@@ -27,7 +27,7 @@ Para requisitar uma nova página no Github utilize um parâmetro page no fim da 
 https://api.github.com/users/diego3g/starred?page=2
 ```
 
-### [DOING] Pull to Refresh
+### [DONE] Pull to Refresh
 
 Adicione uma funcionalidade para quando o usuário arrastar a listagem de repositórios favoritados pra baixo atualize a lista resetando o estado, ou seja, volte o estado da paginação para a página 1 exibindo apenas os 30 primeiros itens.
 
@@ -42,7 +42,7 @@ A funcionalidade “Pull to Refresh” existe por padrão na FlatList e pode ser
 >
 ```
 
-### [TODO] WebView
+### [DOING] WebView
 
 Crie uma nova página na aplicação que vai ser acessada quando o usuário clicar em um repositório favoritado, essa página deve conter apenas o Header da aplicação. O conteúdo da página será uma WebView, ou seja, um browser integrado que exibe o atributo html_url presente no objeto do repositório que vem da API do Github.
 

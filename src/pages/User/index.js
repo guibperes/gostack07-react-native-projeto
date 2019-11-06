@@ -19,20 +19,29 @@ export function User ({ navigation }) {
   const user = navigation.getParam('user')
   const [stars, setStars] = useState([])
   const [page, setPage] = useState(1)
+  const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
     async function handleGetStars () {
       const { data } = await api.get(`/users/${user.login}/starred`, {
         params: {
-          per_page: 10,
           page
         }
       })
 
       setStars([...stars, ...data])
+      setRefreshing(false)
     }
     handleGetStars()
   }, [page])
+
+  function handleRefresh () {
+    if (page === 1) return
+
+    setRefreshing(true)
+    setStars([])
+    setPage(1)
+  }
 
   return (
     <Container>
@@ -47,6 +56,8 @@ export function User ({ navigation }) {
         keyExtractor={star => String(star.id)}
         onEndReached={() => setPage(page + 1)}
         onEndReachedThreshold={0.2}
+        onRefresh={handleRefresh}
+        refreshing={refreshing}
         renderItem={({ item }) => (
           <Starred>
             <OwnerAvatar source={{ uri: item.owner.avatar_url }} />
