@@ -1,33 +1,27 @@
 module.exports = {
   env: {
-    es6: true
+    es6: true,
   },
-  extends: [
-    'standard',
-    '@react-native-community'
-  ],
+  extends: ['airbnb', 'prettier'],
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
+    SharedArrayBuffer: 'readonly',
   },
-  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: 'module',
   },
-  plugins: [
-    'react'
-  ],
+  plugins: ['react'],
   rules: {
-    'react/jsx-filename-extension': [
-      'warn',
-      {
-        extensions: ['.jsx', '.js']
-      }
-    ],
-    'import/prefer-default-export': 'off'
-  }
-}
+    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+    'react/prop-types': 'off',
+    'global-require': 'off',
+    'import/prefer-default-export': 'off',
+    'no-unused-expressions': ['error', { allowTaggedTemplates: true }],
+    'jsx-quotes': ['error', 'prefer-single'],
+    'arrow-parens': 'off',
+  },
+};

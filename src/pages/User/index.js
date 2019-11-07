@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
-import { api } from '../../services/api'
+import { api } from '../../services/api';
 import {
   Container,
   Header,
@@ -12,39 +12,39 @@ import {
   OwnerAvatar,
   Info,
   Title,
-  Author
-} from './styles'
+  Author,
+} from './styles';
 
-export function User ({ navigation }) {
-  const user = navigation.getParam('user')
-  const [stars, setStars] = useState([])
-  const [page, setPage] = useState(1)
-  const [refreshing, setRefreshing] = useState(false)
+export function User({ navigation }) {
+  const user = navigation.getParam('user');
+  const [stars, setStars] = useState([]);
+  const [page, setPage] = useState(1);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    async function handleGetStars () {
+    async function handleGetStars() {
       const { data } = await api.get(`/users/${user.login}/starred`, {
         params: {
-          page
-        }
-      })
+          page,
+        },
+      });
 
-      setStars([...stars, ...data])
-      setRefreshing(false)
+      setStars([...stars, ...data]);
+      setRefreshing(false);
     }
-    handleGetStars()
-  }, [page])
+    handleGetStars();
+  }, [page]);
 
-  function handleRefresh () {
-    if (page === 1) return
+  function handleRefresh() {
+    if (page === 1) return;
 
-    setRefreshing(true)
-    setStars([])
-    setPage(1)
+    setRefreshing(true);
+    setStars([]);
+    setPage(1);
   }
 
-  function handleRepoWebview (repo) {
-    navigation.navigate('Webview', { repo })
+  function handleRepoWebview(repo) {
+    navigation.navigate('Webview', { repo });
   }
 
   return (
@@ -73,9 +73,9 @@ export function User ({ navigation }) {
         )}
       />
     </Container>
-  )
+  );
 }
 
 User.navigationOptions = ({ navigation }) => ({
-  title: navigation.getParam('user').name
-})
+  title: navigation.getParam('user').name,
+});

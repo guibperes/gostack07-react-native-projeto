@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { Keyboard, ActivityIndicator } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
-import AsyncStorage from '@react-native-community/async-storage'
+import React, { useState, useEffect } from 'react';
+import { Keyboard, ActivityIndicator } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-community/async-storage';
 
-import { api } from '../../services/api'
+import { api } from '../../services/api';
 
 import {
   Container,
@@ -17,77 +17,74 @@ import {
   Bio,
   ProfileButtton,
   ProfileButtonText,
-  PageLoadingContainer
-} from './styles'
+  PageLoadingContainer,
+} from './styles';
 
-export function Main ({ navigation }) {
-  const [newUser, setNewUser] = useState('')
-  const [users, setUsers] = useState([])
-  const [loading, setloading] = useState(false)
-  const [usersLoading, setUsersLoading] = useState(true)
-  const [inputError, setInputError] = useState(false)
+export function Main({ navigation }) {
+  const [newUser, setNewUser] = useState('');
+  const [users, setUsers] = useState([]);
+  const [loading, setloading] = useState(false);
+  const [usersLoading, setUsersLoading] = useState(true);
+  const [inputError, setInputError] = useState(false);
 
   useEffect(() => {
-    async function handleStorageGet () {
-      const users = await AsyncStorage.getItem('USERS')
+    async function handleStorageGet() {
+      const usersCache = await AsyncStorage.getItem('USERS');
 
-      if (users) {
-        setUsers(JSON.parse(users))
+      if (usersCache) {
+        setUsers(JSON.parse(usersCache));
       }
 
-      setUsersLoading(false)
+      setUsersLoading(false);
     }
-    handleStorageGet()
-  }, [])
+    handleStorageGet();
+  }, []);
 
   useEffect(() => {
-    async function handleStorageSave () {
-      AsyncStorage.setItem('USERS', JSON.stringify(users))
+    async function handleStorageSave() {
+      AsyncStorage.setItem('USERS', JSON.stringify(users));
     }
-    handleStorageSave()
-  }, [users])
+    handleStorageSave();
+  }, [users]);
 
-  function handleNavigate (user) {
-    navigation.navigate('User', { user })
+  function handleNavigate(user) {
+    navigation.navigate('User', { user });
   }
 
-  function handleTextChange (text) {
-    setNewUser(text)
-    setInputError(false)
+  function handleTextChange(text) {
+    setNewUser(text);
+    setInputError(false);
   }
 
-  async function handleSubmit () {
-    setloading(true)
+  async function handleSubmit() {
+    setloading(true);
 
     try {
-      const { data: apiData } = await api.get(`/users/${newUser}`)
+      const { data: apiData } = await api.get(`/users/${newUser}`);
 
       const data = {
         name: apiData.name,
         login: apiData.login,
         bio: apiData.bio,
-        avatar: apiData.avatar_url
-      }
+        avatar: apiData.avatar_url,
+      };
 
-      setUsers([...users, data])
-      setNewUser('')
-      setloading(false)
-      Keyboard.dismiss()
+      setUsers([...users, data]);
+      setNewUser('');
+      setloading(false);
+      Keyboard.dismiss();
     } catch (error) {
-      setloading(false)
-      setInputError(true)
+      setloading(false);
+      setInputError(true);
     }
   }
 
   if (usersLoading) {
     return (
       <PageLoadingContainer>
-        <ActivityIndicator
-          color='#7159C1'
-          size={38}
-        />
+        <ActivityIndicator color='#7159C1' size={38} />
       </PageLoadingContainer>
-    )
+    );
   }
 
   return (
@@ -128,9 +125,9 @@ export function Main ({ navigation }) {
         )}
       />
     </Container>
-  )
+  );
 }
 
 Main.navigationOptions = () => ({
-  title: 'Main'
-})
+  title: 'Main',
+});
