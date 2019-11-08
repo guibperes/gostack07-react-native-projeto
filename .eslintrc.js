@@ -2,7 +2,11 @@ module.exports = {
   env: {
     es6: true,
   },
-  extends: ['airbnb', 'prettier'],
+  extends: [
+    'airbnb',
+    'prettier',
+    'prettier/react'
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -14,14 +18,15 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react'],
+  plugins: [
+    'react',
+    'prettier'
+  ],
   rules: {
+    'prettier/prettier': 'error',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
     'react/prop-types': 'off',
     'global-require': 'off',
     'import/prefer-default-export': 'off',
-    'no-unused-expressions': ['error', { allowTaggedTemplates: true }],
-    'jsx-quotes': ['error', 'prefer-single'],
-    'arrow-parens': 'off',
   },
 };
